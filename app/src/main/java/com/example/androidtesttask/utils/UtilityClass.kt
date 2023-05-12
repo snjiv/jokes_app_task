@@ -3,6 +3,7 @@ package com.example.androidtesttask.utils
 import android.app.Activity
 import android.app.ProgressDialog
 import android.content.Context
+import android.net.ConnectivityManager
 import android.preference.PreferenceManager
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
@@ -41,6 +42,11 @@ object UtilityClass {
         if (progressDialog != null && progressDialog!!.isShowing) {
             progressDialog!!.dismiss()
         }
+    }
+
+    fun isNetworkConnected(context: Context): Boolean {
+        val cm = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+        return cm.activeNetworkInfo != null
     }
 
 }

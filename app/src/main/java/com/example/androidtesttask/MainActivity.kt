@@ -6,6 +6,7 @@ import android.os.CountDownTimer
 import android.os.Handler
 import android.os.health.TimerStat
 import android.util.Log
+import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.androidtesttask.adapters.AdapterJokesRV
@@ -32,7 +33,14 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
         viewModelClass = ViewModelProvider(this)[ViewModelClass::class.java]
         fetchLocalData()
-        callForNewJoke()
+
+       if (UtilityClass.isNetworkConnected(applicationContext)){
+           callForNewJoke()
+       }
+        else{
+           binding.timerTxt.text = "No internet connection!"
+           Toast.makeText(applicationContext,"Please Turn on Internet connection!",Toast.LENGTH_SHORT).show()
+       }
     }
 
     private fun fetchLocalData() {
